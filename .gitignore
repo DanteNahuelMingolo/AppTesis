@@ -1,0 +1,10 @@
+.vscode
+
+backFiles
+frontFiles
+
+__pycache__
+
+../Jupyter
+
+back/tags

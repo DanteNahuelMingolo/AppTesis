@@ -1,0 +1,18 @@
+<div [hidden]="!dataLoaded" class="col-12">
+    <div class="chart-wrapper">
+        <canvas baseChart 
+            [datasets]="lineChartData" 
+            [labels]="lineChartLabels" 
+            [options]="lineChartOptions"
+            [colors]="lineChartColors" 
+            [legend]="lineChartLegend" 
+            [chartType]="lineChartType" 
+            [plugins]="lineChartPlugins">
+        </canvas>
+    </div>
+</div>
+<div [hidden]="dataLoaded" class="col-12">
+    <div class="alert alert-warning" role="alert">
+        Aún no se cargaron datos para generar el Chart
+    </div>
+</div>

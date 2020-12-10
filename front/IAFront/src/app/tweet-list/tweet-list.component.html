@@ -1,0 +1,13 @@
+<div [hidden]="!dataLoaded" class="col-12">
+  <ul class="list-group">
+    <li *ngFor="let tweet of tweets" class="list-group-item">
+      {{ tweet.Texto }}
+    </li>
+  </ul>  
+  <div class="col-12">&nbsp;</div>
+</div>
+<div [hidden]="dataLoaded" class="col-12">
+    <div class="alert alert-warning" role="alert">
+      Aún no hay tweets para mostrar
+    </div>
+</div>

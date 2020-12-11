@@ -1,0 +1,12 @@
+header {
+    color:whitesmoke;
+    font-family: "Lato", Haettenschweiler;
+    font-size: 3.2em;
+    text-align: center;
+  
+    background-color: rgb(36, 41, 100);
+  }
+.my-nav{
+    background-color: rgb(36, 41, 100);
+    padding: 0em 0em
+}

@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class ApiService {
-  //private apiURL = "http://fatalblack.pythonanywhere.com/api/";
   private apiURL = "http://localhost:5000/api/";
 
   httpOptions = {
@@ -15,16 +14,16 @@ export class ApiService {
   {
   }
 
-  getDataForPieChart (word: string): Observable<any> {
-    return this.httpClient.get<any>(this.apiURL + "dataForPieChart/" + word);
+  getDataForPieChart (query: string): Observable<any> {
+    return this.httpClient.get<any>(this.apiURL + "dataForPieChart/" + encodeURIComponent(query));
   }
 
-  getTwitts (word: string, maxResults: number): Observable<any> {
-    return this.httpClient.get<any>(this.apiURL + "searchTwitts/" + word + "/" + maxResults);
+  getTwitts (query: string, maxResults: number): Observable<any> {
+    return this.httpClient.get<any>(this.apiURL + "searchTwitts/" +encodeURIComponent(query) + "/" + maxResults);
   }
 
   startSearch (query:string):Observable<any>{
-     return this.httpClient.get<any>(this.apiURL + "streaming/"+ query, this.httpOptions );
+     return this.httpClient.get<any>(this.apiURL + "streaming/"+ encodeURIComponent(query), this.httpOptions );
   }
 
   getTweets (): Observable<any>{

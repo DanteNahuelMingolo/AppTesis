@@ -24,7 +24,8 @@ import { SearchComponent } from './search/search.component';
     LineChartComponent,
     HomeComponent,
     TweetListComponent,
-    SearchComponent
+    SearchComponent,
+    
   ],
   imports: [
     HttpClientModule,

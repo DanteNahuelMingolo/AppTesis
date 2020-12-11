@@ -1,0 +1,21 @@
+.my-div{
+    margin-top:1.5em;
+}
+
+.card{
+    display:inline-flex
+}
+/* .card-title{
+    width: 2em;
+    text-align: center;
+
+}
+*/
+.card-body{
+    padding: 10px;
+    text-align: center;
+}
+ 
+.icono{
+font-size: 1.9em;}
+

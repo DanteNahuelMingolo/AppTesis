@@ -12,15 +12,21 @@ export class SearchComponent implements OnInit {
   //atributos para el formulario de búsqueda
   wordInput: string;
   maxResultsInput: number;
+  countTotal: number;
+  countAngry: number;
+  countNeutral: number;
+  countNotAngry: number;
 
   //data para los componentes hijos
   public dataChart: any;
   public dataTweets: any;
   public isSearching: any;
+  public dataCounters: any;
 
   //RealTime para data
   dataChartRealTime: RealTime;
   dataTweetsRealTime: RealTime;
+  dataCountersRealTime: RealTime;
 
   /**
   * configuración y seteo de lo necesario
@@ -39,43 +45,50 @@ export class SearchComponent implements OnInit {
   /**
   * Configuración inicial del formulario
   */
-  initialFormConfiguration(){
+  initialFormConfiguration() {
     this.wordInput = "";
     this.maxResultsInput = 3;
+    this.countTotal = 0;
+    this.countAngry = 0;
+    this.countNeutral = 0;
+    this.countNotAngry = 0;
   }
 
   /**
   * Configuración inicial de la data
   */
-  initialDataConfiguration(){
+  initialDataConfiguration() {
     this.dataChart = null;
     this.dataTweets = null;
     this.isSearching = null;
+    this.dataCounters = null;
   }
 
   /**
   * Busca datos en base a los campos del formulario
   */
-  search(){
-    if(this.wordInput == "" || this.wordInput == null || !(this.maxResultsInput > 0)){
+  search() {
+    if (this.wordInput == "" || this.wordInput == null || !(this.maxResultsInput > 0)) {
       alert("Todos los campos son obligatorios");
-    }else{
+    } else {
       //obtenemos los datos para los chart
-     // this.getDataChart();
-     this.startDataChartRealTime();
-      
-     //iniciamos la búsqueda
-     this.startSearch();
+      // this.getDataChart();
+      this.startDataChartRealTime();
+
+      //iniciamos la búsqueda
+      this.startSearch();
       //obtenemos los datos para los tweets
-     this.startDataTweetsRealTime();
+      this.startDataTweetsRealTime();
+      //actualizo los contadores
+      this.startDataCountersRealTime()
     }
   }
 
   /**
   * Obtiene los datos para los chart
   */
-  getDataChart(){
-    this.apiService.getDataForPieChart(this.wordInput).subscribe(result => {
+  getDataChart() {
+    this.apiService.getDataForPieChart().subscribe(result => {
       this.dataChart = result;
     });
   }
@@ -83,16 +96,16 @@ export class SearchComponent implements OnInit {
   /**
   * Obtiene los datos para los chart
   */
- startSearch(){
-   this.apiService.startSearch(this.wordInput).subscribe(result =>{
-    this.isSearching = result;
-   });
+  startSearch() {
+    this.apiService.startSearch(this.wordInput).subscribe(result => {
+      this.isSearching = result;
+    });
   }
 
   /**
   * Obtiene los datos para los tweets
   */
-  getTweets(){
+  getTweets() {
     this.apiService.getTweets().subscribe(result => {
       this.dataTweets = result;
     });
@@ -101,11 +114,11 @@ export class SearchComponent implements OnInit {
   /**
   * Inicia el RealTime para dataChart
   */
-  startDataChartRealTime(){
+  startDataChartRealTime() {
     //como la función que quiero enviar al RealTime usa el apiserver debo enviar todo el módulo
     var context = this;
-    var functionToExecute = function() {
-      context.apiService.getDataForPieChart(context.wordInput).subscribe(result => {
+    var functionToExecute = function () {
+      context.apiService.getDataForPieChart().subscribe(result => {
         context.dataChart = result;
       });
     };
@@ -113,20 +126,27 @@ export class SearchComponent implements OnInit {
     this.dataChartRealTime = new RealTime(3000, functionToExecute);
   }
 
-  /**
-  * Detiene el RealTime para dataChart
-  */
-  stopDataChartRealTime(){
-    this.dataChartRealTime.stop();
+  startDataCountersRealTime(){
+    var context = this;
+    var functionToExecute = function (){
+      context.apiService.getCounters().subscribe(result =>{
+        context.countAngry = result.data.data.countAggresive;
+        context.countNeutral = result.data.data.countNeutral;
+        context.countNotAngry = result.data.data.countNonAggresive;
+        context.countTotal = result.data.data.countTotal;
+      });
+    };
+
+    this.dataCountersRealTime = new RealTime(3000,functionToExecute)
   }
 
   /**
   * Inicia el RealTime para dataTweets
   */
-  startDataTweetsRealTime(){
+  startDataTweetsRealTime() {
     //como la función que quiero enviar al RealTime usa el apiserver debo enviar todo el módulo
     var context = this;
-    var functionToExecute = function() {
+    var functionToExecute = function () {
       context.apiService.getTweets().subscribe(result => {
         context.dataTweets = result;
       });
@@ -138,7 +158,14 @@ export class SearchComponent implements OnInit {
   /**
   * Detiene el RealTime para dataTweets
   */
-  stopDataTweetsRealTime(){
+  stopDataTweetsRealTime() {
     this.dataTweetsRealTime.stop();
   }
+  /**
+  * Detiene el RealTime para dataChart
+  */
+  stopDataChartRealTime() {
+    this.dataChartRealTime.stop();
+  }
+
 }

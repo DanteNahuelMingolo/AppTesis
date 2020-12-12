@@ -27,11 +27,14 @@ def getTweets():
 def streaming(word):
 	return service.streaming(word)
 
-#http://localhost:5000/api/dataForPieChart/<word>
-@app.route('/api/dataForPieChart/<string:word>',methods = ['GET'])
-def dataForPieChart(word):
-	return service.dataForPieChart(word)
+#http://localhost:5000/api/dataForPieChart/
+@app.route('/api/dataForPieChart/',methods = ['GET'])
+def dataForPieChart():
+	return service.dataForPieChart()
 
+@app.route('/api/getCounters/', methods = ['GET'])
+def getCounters():
+	return service.getCounters()
 
 #capturadores de errores 404 y 405
 @app.errorhandler(404)

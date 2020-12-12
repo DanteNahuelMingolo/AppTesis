@@ -9,6 +9,7 @@ tweetsBuffer = []
 bufferSize = 2
 
 #Contadores
-cantAgresivo = 0 
-cantNoAgresivo = 0
-cantNeutro = 0
+countAggresive = 0 
+countNonAggresive = 0
+countNeutral = 0
+countTotal = 0

@@ -32,10 +32,9 @@ etiquetador = Etiquetador()
 
 def actualizar_sentimientos(preds):
     conteos = Counter(preds)
-    data.cantAgresivo += conteos['sí']
-    data.cantNeutro += conteos['neutro']
-    data.cantNoAgresivo += conteos['no']
-
+    data.countAggresive += conteos['sí']
+    data.countNeutral += conteos['neutro']
+    data.countNonAggresive += conteos['no']
 
 def clasificar(tweets_original):
     tweets = tweets_original.copy(deep=True)

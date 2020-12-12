@@ -70,7 +70,7 @@ def prepareTweetsForDB(twitts):
 
     # Actualizo streamingStore, para mostrar de a 5 tweets
     data.streamingStore = data.streamingStore.append(tData)
-
+    data.countTotal = len(data.streamingStore.index)
 
 
     # Guardo los tweets en SQL

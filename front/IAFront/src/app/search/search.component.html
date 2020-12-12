@@ -1,5 +1,5 @@
 <!--Formulario de búsqueda-->
-<div class="row my-div">
+<div class="row my-div input-wrapper">
     <!--    <div class="col-12">
         <h4>Formulario de Búsqueda</h4>
     </div> -->
@@ -16,56 +16,59 @@
         <small id="wordHelp" class="form-text text-muted">Use ";" para buscar varios términos. Ej.: Argentina;
             #argentina</small>
     </div>
-    <div class="card">
-        <i class="far fa-angry icono">0</i>
-        <h5 class="card-title">0</h5>
-    </div>
-    <div class="card">
-        <i class="far fa-meh icono"></i>
-        <h5 class="card-title">0</h5>
-    </div>
-    <div class="card">
-        <i class="far fa-meh-blank icono"></i>
-        <h5 class="card-title">0</h5>
-        </div>
+    <div class="col-md-6 counters">
         <div class="card">
             <i class="fab fa-twitter icono"></i>
-            <h5 class="card-title">0</h5>
+            <h5 class="card-title">{{countTotal}}</h5>
         </div>
+        <div class="card">
+            <i class="far fa-angry icono"></i>
+            <h5 class="card-title">{{countAngry}}</h5>
+        </div>
+        <div class="card">
+            <i class="far fa-meh-blank icono"></i>
+            <h5 class="card-title">{{countNotAngry}}</h5>
+        </div>
+        <div class="card">
+            <i class="far fa-meh icono"></i>
+            <h5 class="card-title">{{countNeutral}}</h5>
+        </div>
+    </div>
     <!--     <div class="col-12">
         <button type="button" class="btn btn-primary" (click)="search()">Buscar</button>
     </div> -->
-    <!--Charts-->
-    <div class="row">
-        <div class="col-12">&nbsp;</div>
-        <div class="col-md-3">
-            <h4>Gráficos en Tiempo Real</h4>
-        </div>
-        <div class="col-md-9">
-            <div class="btn-group btn-group-sm" role="group" [hidden]="!dataChart">
-                <button type="button" (click)="startDataChartRealTime()" class="btn btn-success">Iniciar</button>
-                <button type="button" (click)="stopDataChartRealTime()" class="btn btn-danger">Detener</button>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <app-line-chart [(response)]="dataChart"></app-line-chart>
-        </div>
-        <div class="col-md-6">
-            <app-pie-chart [(response)]="dataChart"></app-pie-chart>
+</div>
+<!--Charts-->
+<div class="row">
+    <div class="col-12">&nbsp;</div>
+    <div class="col-md-3">
+        <h4>Gráficos en Tiempo Real</h4>
+    </div>
+    <div class="col-md-9">
+        <div class="btn-group btn-group-sm" role="group" [hidden]="!dataChart">
+            <button type="button" (click)="startDataChartRealTime()" class="btn btn-success">Iniciar</button>
+            <button type="button" (click)="stopDataChartRealTime()" class="btn btn-danger">Detener</button>
         </div>
     </div>
-    <!--Tweets-->
-    <div class="row">
-        <div class="col-3">
-            <h4>Tweets en Tiempo Real</h4>
-        </div>
-        <div class="col-md-9">
-            <div class="btn-group btn-group-sm" role="group" [hidden]="!dataTweets">
-                <button type="button" (click)="startDataTweetsRealTime()" class="btn btn-success">Iniciar</button>
-                <button type="button" (click)="stopDataTweetsRealTime()" class="btn btn-danger">Detener</button>
-            </div>
-        </div>
-        <div class="col-12">
-            <app-tweet-list [(response)]="dataTweets"></app-tweet-list>
+    <div class="col-md-6">
+        <app-line-chart [(response)]="dataChart"></app-line-chart>
+    </div>
+    <div class="col-md-6">
+        <app-pie-chart [(response)]="dataChart"></app-pie-chart>
+    </div>
+</div>
+<!--Tweets-->
+<div class="row">
+    <div class="col-3">
+        <h4>Tweets en Tiempo Real</h4>
+    </div>
+    <div class="col-md-9">
+        <div class="btn-group btn-group-sm" role="group" [hidden]="!dataTweets">
+            <button type="button" (click)="startDataTweetsRealTime()" class="btn btn-success">Iniciar</button>
+            <button type="button" (click)="stopDataTweetsRealTime()" class="btn btn-danger">Detener</button>
         </div>
     </div>
+    <div class="col-12">
+        <app-tweet-list [(response)]="dataTweets"></app-tweet-list>
+    </div>
+</div>

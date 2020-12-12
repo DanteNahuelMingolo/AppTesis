@@ -14,8 +14,12 @@ export class ApiService {
   {
   }
 
-  getDataForPieChart (query: string): Observable<any> {
-    return this.httpClient.get<any>(this.apiURL + "dataForPieChart/" + encodeURIComponent(query));
+  getDataForPieChart (): Observable<any> {
+    return this.httpClient.get<any>(this.apiURL + "dataForPieChart/");
+  }
+
+  getCounters ():Observable<any>{
+    return this.httpClient.get<any>(this.apiURL+ "getCounters/");
   }
 
   getTwitts (query: string, maxResults: number): Observable<any> {

@@ -20,10 +20,10 @@ class Preprocesador(BaseEstimator, TransformerMixin):
                  repetidos=True, abreviaciones=True,
                  leng_inclusivo=True, espacios=True, stop_words=True,
                  raices=False, lemas=False):
-        self.stopwords_español = stp.words('spanish')
-        self.stopwords_español.extend(['vos', 'sos'])
+        self.stopwords_espaniol = stp.words('spanish')
+        self.stopwords_espaniol.extend(['vos', 'sos'])
         self.stopwords_sin_acentos = self.eliminar_acentos_stopwords(
-            self.stopwords_español)
+            self.stopwords_espaniol)
         self.tokenizer = TweetTokenizer()
 
         self.stemmer = SnowballStemmer('spanish')
@@ -147,14 +147,14 @@ class Preprocesador(BaseEstimator, TransformerMixin):
                 token for token in tokens if token not in self.stopwords_sin_acentos and len(token) > 2]
         else:
             tweet = [
-                token for token in tokens if token not in self.stopwords_español and len(token) > 2]
+                token for token in tokens if token not in self.stopwords_espaniol and len(token) > 2]
         return ' '.join(tweet)
 
     # Stemming
     def stemming(self, tweet):
         tokens = self.tokenizar(tweet)
-        tweet_raíz = ' '.join([self.stemmer.stem(token) for token in tokens])
-        return tweet_raíz
+        tweet_raiz = ' '.join([self.stemmer.stem(token) for token in tokens])
+        return tweet_raiz
 
     # Devuelve lista de tokens, pero lematizados
     def lematizar(self, tweet):

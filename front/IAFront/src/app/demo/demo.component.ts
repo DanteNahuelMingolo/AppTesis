@@ -3,13 +3,12 @@ import { ApiService } from 'src/app/api.service';
 import { RealTime } from '../modules/real-time';
 import { saveAs } from 'file-saver';
 
-
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  selector: 'app-demo',
+  templateUrl: './demo.component.html',
+  styleUrls: ['./demo.component.css']
 })
-export class SearchComponent implements OnInit {
+export class DemoComponent implements OnInit {
   //atributos para el formulario de búsqueda
   wordInput: string;
   maxResultsInput: number;
@@ -88,7 +87,7 @@ export class SearchComponent implements OnInit {
   /**
   * Busca datos en base a los campos del formulario
   */
-  search() {
+  searchDemo() {
     if (this.wordInput == "" || this.wordInput == null || !(this.maxResultsInput > 0)) {
       alert("Todos los campos son obligatorios");
     } else {
@@ -99,7 +98,7 @@ export class SearchComponent implements OnInit {
       this.startDataLineChartRealTime();
 
       //iniciamos la búsqueda
-      this.startSearch();
+      this.startDemo();
       //obtenemos los datos para los tweets
       this.startDataTweetsRealTime();
       //actualizo los contadores
@@ -111,8 +110,8 @@ export class SearchComponent implements OnInit {
   /**
   * Obtiene los datos para los chart
   */
-  startSearch() {
-    this.apiService.startSearch(this.wordInput).subscribe(result => {
+  startDemo() {
+    this.apiService.startDemo(this.wordInput).subscribe(result => {
       this.isSearching = result;
     });
   }

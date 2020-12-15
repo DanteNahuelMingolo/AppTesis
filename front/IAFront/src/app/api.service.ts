@@ -9,28 +9,43 @@ export class ApiService {
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
   };
-  
-  constructor(private httpClient : HttpClient)
-  {
+
+  constructor(private httpClient: HttpClient) {
   }
 
-  getDataForPieChart (): Observable<any> {
-    return this.httpClient.get<any>(this.apiURL + "dataForPieChart/");
+  getDataForPieChart(): Observable<any> {
+    return this.httpClient.get<any>(this.apiURL + "getDataForPieChart/");
   }
 
-  getCounters ():Observable<any>{
-    return this.httpClient.get<any>(this.apiURL+ "getCounters/");
+  getDataForLineChart(): Observable<any> {
+    return this.httpClient.get<any>(this.apiURL + "getDataForLineChart/");
   }
 
-  getTwitts (query: string, maxResults: number): Observable<any> {
-    return this.httpClient.get<any>(this.apiURL + "searchTwitts/" +encodeURIComponent(query) + "/" + maxResults);
+  getWordCloud(): Observable<Blob> {
+    return this.httpClient.get<Blob>(this.apiURL + "getWordCloud/" + Date.now(), { responseType: 'blob' as 'json', });
   }
 
-  startSearch (query:string):Observable<any>{
-     return this.httpClient.get<any>(this.apiURL + "streaming/"+ encodeURIComponent(query), this.httpOptions );
+  getCounters(): Observable<any> {
+    return this.httpClient.get<any>(this.apiURL + "getCounters/");
   }
 
-  getTweets (): Observable<any>{
+  exportCSV(){
+    return this.httpClient.get(this.apiURL + "exportCSV/"+ Date.now(), {responseType:'blob'});
+  }
+
+  exportExcel(){
+    return this.httpClient.get(this.apiURL + "exportExcel/"+ Date.now(), {responseType:'blob'});
+  }
+
+  startSearch(query: string): Observable<any> {
+    return this.httpClient.get<any>(this.apiURL + "streaming/" + encodeURIComponent(query), this.httpOptions);
+  }
+
+  startDemo(query: string): Observable<any> {
+    return this.httpClient.get<any>(this.apiURL + "startDemo/" + encodeURIComponent(query), this.httpOptions);
+  }
+
+  getTweets(): Observable<any> {
     return this.httpClient.get<any>(this.apiURL + "getTweets/");
   }
 }

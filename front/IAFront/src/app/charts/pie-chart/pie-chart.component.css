@@ -1,0 +1,15 @@
+.card {
+  padding: 10px;
+  background: #fff;
+  border-radius: 20px;
+  margin: 0px auto;
+}
+
+.highlight {
+  font-weight: bold;
+  color: #294;
+}
+
+.shadow {
+  box-shadow: 0 5px 10px rgba(154, 160, 185, .05), 0 15px 20px rgba(166, 173, 201, .2);
+}

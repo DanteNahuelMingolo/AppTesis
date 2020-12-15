@@ -1,5 +1,5 @@
 # Librerías Python
-import pickle
+import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.pipeline import Pipeline, make_pipeline, make_union, FeatureUnion
 from collections import Counter
@@ -15,10 +15,10 @@ from normalizador import Normalizador
 from preprocesador import Preprocesador
 
 # Cargar modelo desde el archivo
-pkl_filename = "back/tags/pipeline_final.pkl"
+pkl_filename = "back/tags/pipeline_final_smote.joblib"
 
 with open(pkl_filename, 'rb') as file:
-    pipeline = pickle.load(file)
+    pipeline = joblib.load(file)
 
 # Instancio módulos de ayuda para procesamiento
 norm = Normalizador(entidades=False)
@@ -29,7 +29,6 @@ ext_citas = ExtractorCitas()
 ext_insultos = ExtractorInsultos()
 etiquetador = Etiquetador()
 
-
 def actualizar_sentimientos(preds):
     conteos = Counter(preds)
     data.countAggresive += conteos['sí']
@@ -37,6 +36,23 @@ def actualizar_sentimientos(preds):
     data.countNonAggresive += conteos['no']
 
 def clasificar(tweets_original):
+    tweets = tweets_original.copy(deep=True)
+    tweets['Normalizado'] = norm.fit_transform(tweets['Texto'])
+    tweets['Preprocesado'] = prep.fit_transform(tweets['Normalizado'])
+    tweets['Cantidad insultos'] = ext_insultos.fit_transform(
+        tweets['Normalizado'])
+    tweets['Cantidad risas'] = ext_risas.fit_transform(tweets['Normalizado'])
+    tweets['Cantidad citas'] = ext_citas.fit_transform(tweets['Normalizado'])
+    tweets['POS'] = etiquetador.fit_transform(tweets['Normalizado'])
+
+    etiquetador.helper_etiquetador.guardar_cache()
+
+    preds = pipeline.predict(tweets)
+
+    actualizar_sentimientos(preds)
+    return preds
+
+def clasificarFakeTweets(tweets_original):
     tweets = tweets_original.copy(deep=True)
     tweets['Normalizado'] = norm.fit_transform(tweets['Texto'])
     tweets['Preprocesado'] = prep.fit_transform(tweets['Normalizado'])

@@ -27,6 +27,7 @@
     "bootstrap-icons": "^1.1.0",
     "chart.js": "^2.9.4",
     "chartjs-plugin-labels": "^1.1.0",
+    "file-saver": "^2.0.5",
     "font-awesome": "^4.7.0",
     "jquery": "^3.5.1",
     "ng2-charts": "^2.4.2",

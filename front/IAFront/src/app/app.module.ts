@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';    
-
+import { FormsModule } from '@angular/forms';
+import { Pipe, PipeTransform } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +16,9 @@ import { ApiService } from './api.service';
 import { HttpClientModule } from "@angular/common/http";
 import { TweetListComponent } from './tweet-list/tweet-list.component';
 import { SearchComponent } from './search/search.component';
+import { TruncatePipe } from './truncate.pipe';
+import { WordcloudComponent } from './wordcloud/wordcloud.component';
+import { DemoComponent } from './demo/demo.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,9 @@ import { SearchComponent } from './search/search.component';
     HomeComponent,
     TweetListComponent,
     SearchComponent,
-    
+    TruncatePipe,
+    WordcloudComponent,
+    DemoComponent,
   ],
   imports: [
     HttpClientModule,

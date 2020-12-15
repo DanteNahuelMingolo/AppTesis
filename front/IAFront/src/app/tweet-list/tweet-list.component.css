@@ -1,0 +1,52 @@
+.no {
+    border-color: #86c7f3;
+    border-left-width: 10px;
+}
+
+.sí {
+    border-color: #ffa1b5;
+    border-left-width: 10px;
+}
+
+.neutro {
+    border-color: #ffe29a;
+    border-left-width: 10px;
+}
+
+.card {
+    padding: 1rem;
+    background: #fff;
+    border-radius: 20px;
+    margin: 5px auto;
+}
+
+.highlight {
+    font-weight: bold;
+    color: #294;
+}
+
+.shadow {
+    box-shadow: 0 5px 10px rgba(154, 160, 185, .05), 0 15px 20px rgba(166, 173, 201, .2);
+}
+
+li {
+    max-width: 35rem;
+    max-height: 10rem;
+    min-width: 35rem;
+    min-height: 10rem;
+    text-align: justify;
+    padding: 1.5em;
+}
+
+p {
+    font-size: 1em;
+    margin: 0px;
+}
+
+small {
+    color: rgb(136, 153, 166);
+}
+
+.list-group-item+.list-group-item{
+    border-top-width: 1px;
+}

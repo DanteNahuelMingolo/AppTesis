@@ -69,10 +69,10 @@ class HelperEtiquetador:
         with open(self.path_lemas, 'wb') as f:
             pickle.dump(self.cache_lemas, f, pickle.HIGHEST_PROTOCOL)
 
-    def añadir_nueva_pos(self,etiquetas):
+    def agregar_nueva_pos(self,etiquetas):
         self.cache_pos[etiquetas['text']] = etiquetas.get('pos')
     
-    def añadir_nuevo_lema(self,etiquetas):
+    def agregar_nuevo_lema(self,etiquetas):
         self.cache_lemas[etiquetas['text']] = etiquetas.get('lema')
     
     def actualizar_gramatica(self,token):
@@ -82,6 +82,6 @@ class HelperEtiquetador:
         'lema' : doc.sentences[0].words[0].lemma,
         'pos' : doc.sentences[0].words[0].pos
         }
-        self.añadir_nueva_pos(gramatica)
-        self.añadir_nuevo_lema(gramatica)
+        self.agregar_nueva_pos(gramatica)
+        self.agregar_nuevo_lema(gramatica)
         return gramatica

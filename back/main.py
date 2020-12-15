@@ -27,14 +27,40 @@ def getTweets():
 def streaming(word):
 	return service.streaming(word)
 
-#http://localhost:5000/api/dataForPieChart/
-@app.route('/api/dataForPieChart/',methods = ['GET'])
-def dataForPieChart():
-	return service.dataForPieChart()
+#http://localhost:5000/api/startDemo/<word>
+@app.route('/api/startDemo/<string:word>',methods = ['GET'])
+def demo(word):
+	return service.startDemo(word)
 
+#http://localhost:5000/api/getDataForPieChart/
+@app.route('/api/getDataForPieChart/',methods = ['GET'])
+def getDataForPieChart():
+	return service.getDataForPieChart()
+
+#http://localhost:5000/api/getDataForLineChart/
+@app.route('/api/getDataForLineChart/', methods = ['GET'])
+def getDataForLineChart():
+	return service.getDataForLineChart()
+
+#http://localhost:5000/api/getWordCloud/
+@app.route('/api/getWordCloud/<string:word>', methods = ['GET'])
+def getWordCloud(word):
+	return service.getWordCloud()
+
+#http://localhost:5000/api/getCounters/
 @app.route('/api/getCounters/', methods = ['GET'])
 def getCounters():
 	return service.getCounters()
+
+#http://localhost:5000/api/exportExcel/
+@app.route('/api/exportExcel/<string:word>', methods = ['GET'])
+def exportExcel(word):
+	return service.exportExcel()
+
+#http://localhost:5000/api/exportCSV/
+@app.route('/api/exportCSV/<string:word>', methods = ['GET'])
+def exportCSV(word):
+	return service.exportCSV()
 
 #capturadores de errores 404 y 405
 @app.errorhandler(404)
@@ -47,4 +73,4 @@ def not_foud(error):
 	return make_response(jsonify({'error': 'Not Exist'}), 405)
 
 if __name__ == '__main__':
-        app.run(debug = False, host='0.0.0.0')
+        app.run(debug = False, host='0.0.0.0', port=5000)

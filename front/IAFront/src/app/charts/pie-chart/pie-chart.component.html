@@ -1,5 +1,5 @@
 <div [hidden]="!dataLoaded" class="col-12">
-  <div class="chart-wrapper">
+  <div class="chart-wrapper card shadow">
       <canvas baseChart 
       [data]="pieChartData" 
       [labels]="pieChartLabels" 
@@ -12,6 +12,6 @@
 </div>
 <div [hidden]="dataLoaded" class="col-12">
   <div class="alert alert-warning" role="alert">
-    Aún no se cargaron datos para generar el Chart
+    Aún no se recibieron datos para generar el gráfico
   </div>
 </div>

@@ -1,7 +1,8 @@
 <div [hidden]="!dataLoaded" class="col-12">
   <ul class="list-group">
-    <li *ngFor="let tweet of tweets" class="list-group-item">
-      {{ tweet.Texto }}
+    <li *ngFor="let tweet of tweets" class="list-group-item card shadow" [ngClass]="tweet.Agresivo">
+      <small>{{ tweet['Fecha de creación'] | date:'HH:mm:ss · dd MMM. yyyy' }}</small>
+      <p>{{ tweet.Texto | truncate }}</p>
     </li>
   </ul>  
   <div class="col-12">&nbsp;</div>

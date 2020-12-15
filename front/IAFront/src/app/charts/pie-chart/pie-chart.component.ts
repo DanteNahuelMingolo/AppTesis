@@ -43,7 +43,7 @@ export class PieChartComponent implements OnInit {
   ngOnChanges() {
     //si hay data la cargamos en el Chart
     if(this.response){
-      if(this.response.data){
+      if(this.response.data.data){
         this.pieChartData = this.response.data.data;
         this.pieChartLabels = this.response.data.chartLabels;
         this.pieChartPlugins = [pluginLabels]

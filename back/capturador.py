@@ -9,14 +9,14 @@ from flask import jsonify, redirect
 from pytz import timezone
 from pandas.io import sql
 from sqlalchemy import create_engine
+from copy import deepcopy
 
 import sys, os
 sys.path.append('back\modules')
 
 # Librerías propias
 import data 
-from modules.tweet import Tweet
-from modules.clasificador import clasificar
+from modules.clasificador import clasificar, clasificarFakeTweets
 # Define after how many twitts we do a insert in the data base.
 bufferSize = data.bufferSize
 
@@ -63,7 +63,7 @@ def prepareTweetsForDB(twitts):
 
         tweet['Fecha de creación'] = localizeDate(t.created_at)
         tweet['Fuente'] = t.source
-
+    
         tData = tData.append(tweet,ignore_index=True)
 
     tData['Agresivo']=clasificar(tData)
@@ -74,5 +74,12 @@ def prepareTweetsForDB(twitts):
 
 
     # Guardo los tweets en SQL
-    saveTweetsToDB(tData)
+    saveTweetsToDB(tData.loc[:,['Id','Texto','Fecha de creación','Fuente','Agresivo']])
+
+def prepareFakeTweetsForDB(t):
+    t['Agresivo'] = clasificarFakeTweets(t)
+
+    # Actualizo streamingStore, para mostrar de a 5 tweets
+    data.streamingStore = data.streamingStore.append(t)
+    data.countTotal = len(data.streamingStore.index)
 
